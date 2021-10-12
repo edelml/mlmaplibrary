@@ -3,16 +3,6 @@ plugins {
     id 'maven-publish'
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = 'com.ml.map'
-            artifactId = 'mlmaplibrary'
-            version = '0.0.1'
-        }
-    }
-}
-
 android {
     compileSdk 30
 
@@ -33,6 +23,19 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.ml.map'
+                artifactId = 'mlmaplibrary'
+                version = '0.0.1'
+            }
+        }
     }
 }
 
